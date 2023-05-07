@@ -1,5 +1,4 @@
--- This script will explode all players when run.
--- It is server-sided.
+-- This script will explode all players when run and everyone will be able to see it.
 
 local Players = game:GetService("Players")
 
@@ -8,13 +7,9 @@ for _, player in ipairs(Players:GetPlayers()) do
 	if character then
 		local humanoid = character:FindFirstChildOfClass("Humanoid")
 		if humanoid then
-			local serverScript = Instance.new("Script")
-			serverScript.Name = "ExplodeScript"
-			serverScript.Source = [[
-				local humanoid = script.Parent
-				humanoid:TakeDamage(humanoid.MaxHealth + 1)
-			]]
-			serverScript.Parent = humanoid
+			local explosion = Instance.new("Explosion")
+			explosion.Position = humanoid.Position
+			explosion.Parent = game.Workspace
 		end
 	end
 end
